@@ -1,10 +1,9 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.13)
+project(capstone)
 
-add_definitions(-std=c++17)
+add_executable(${PROJECT_NAME})
+add_subdirectory(src)
 
-set(CXX_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
+set_property(TARGET capstone PROPERTY CXX_STANDARD 17)
 
-project(HelloWorld)
-
-add_executable(HelloWorld src/main.cpp)
+target_compile_options(capstone PRIVATE -Wall -Wextra)
