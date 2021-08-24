@@ -1,42 +1,48 @@
 #include <memory>
 #include <string>
 
-#include "user_interface/ncurses_engine.h"
-#include "user_interface/windows/menu_window.h"
-#include "user_interface/windows/notification_window.h"
-#include "user_interface/windows/table_window.h"
+#include "configuration/ncurses_engine_config.h"
+
+void LoadProfile(){}
+void RunConnetionTest(){}
+
+std::vector<std::unique_ptr<Row>> LoadProfileList(){
+  auto rows = std::vector<std::unique_ptr<Row>>();
+  auto row = std::unique_ptr<Row>(new Row());
+  row->data.emplace_back("Profile 1");
+  rows.emplace_back(std::move(row));
+  return rows;
+}
 
 int main() {
 
-  std::vector<std::string> menu_options{"Load", "Quit"};
+  bool should_quit = false;
+  auto ncurses_engine = NcursesEngineConfiguration::GenerateConectionTestEngine();
 
-  NcursesEngine ncurses_engine;
-  NotificationWindow notification_window;
-  MenuWindow menu_window(0, 3, menu_options);
-  TableWindow connection_window(
-    0,//fill remaining screen 
-    0,//fill remaining screen
-    menu_window.Width() +1, 
-    notification_window.Height() + 1);
-
-  TableWindow file_selection_window(
-    0,//fill remaining screen 
-    0,//fill remaining screen
-    menu_window.Width() +1, 
-    notification_window.Height() + 1);
-
-  notification_window.Draw(COLS, LINES);
-  menu_window.Draw(COLS, LINES);
-  connection_window.Draw();
-  while (1) {
-
+  ncurses_engine->Draw();
+  while (!should_quit) {
     
-    notification_window.DisplayMessage(menu_window.Selected());
-    // notification_window.DisplayMessage(std::to_string(notification_window.Height()));
-    notification_window.Draw(COLS, LINES);
-    menu_window.ProcessClick();
+    ncurses_engine->Draw();
+    ncurses_engine->ProcessInput();
+
+    auto window = ncurses_engine->WindowByName("menue");
+    auto menu_window = std::dynamic_pointer_cast<MenuWindow>(window);
+    auto menu_selection = menu_window->Selected();
+    if(menu_selection == "Quit")
+      should_quit = true;
+    else if (menu_selection == "Load"){
+      auto window = ncurses_engine->WindowByName("File Selector");
+      auto profile_window = std::dynamic_pointer_cast<TableWindow>(window);
+      profile_window->Show();
+      auto rows = LoadProfileList();
+      profile_window->TableData(std::move(rows));
+
+      ncurses_engine->WindowByName("Connection Table")->Hide();
+    }
+
+    //handle menu selection
+    //handle profile load
   }
 
-  endwin();
   return 0;
 }
