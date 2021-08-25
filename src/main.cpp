@@ -3,15 +3,12 @@
 
 #include "configuration/ncurses_engine_config.h"
 #include "profile/profile_loader.h"
+#include "profile/profile.h"
 
-void LoadProfile(){}
-void RunConnetionTest(){}
+Profile LoadProfile(std::string profile_name){
 
-
-std::string ReadMenuSelection(WindowRepository& window_repository){
-    auto menu_window = window_repository.WindowByName<MenuWindow>("menue");
-    return menu_window->Selected();
 }
+void RunConnetionTest(){}
 
 int main() {
 
@@ -25,17 +22,26 @@ int main() {
     ncurses_engine->Draw();
     ncurses_engine->ProcessInput();
 
-    auto menu_selection = ReadMenuSelection(*window_repository);
+    auto menu_selection = window_repository->WindowByName<MenuWindow>("menue")->Selected();
     if(menu_selection == "Quit")
       should_quit = true;
     else if (menu_selection == "Load"){
+      //Load Profiles into the profile selction window
       auto profile_window = window_repository->WindowByName<TableWindow>("File Selector");
-      // auto profile_window = std::dynamic_pointer_cast<TableWindow>(window);
-      profile_window->Show();
-      auto rows = ProfileLoader::LoadProfileList();
-      profile_window->TableData(std::move(rows));
+      profile_window->TableData(std::move(ProfileLoader::LoadProfileList()));
 
+      //display profile loader, hide connection table (they share the same screen space)
+      profile_window->Show();
       window_repository->WindowByName("Connection Table")->Hide();
+    } else if(window_repository->WindowByName("File Selector")->IsVisable()){
+      auto table_selection = window_repository->WindowByName<TableWindow>("File Selector")->Selected();
+      //  auto notification_window = window_repository->WindowByName<NotificationWindow>("Notification");
+      // notification_window->DisplayMessage("Not selected");
+      if(table_selection.size() != 0){
+        LoadProfile(table_selection.at(0));
+        // notification_window->DisplayMessage();
+      }
+      //   LoadProfile(table_selection);
     }
 
     //handle menu selection
