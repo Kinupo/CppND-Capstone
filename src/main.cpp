@@ -3,11 +3,7 @@
 
 #include "configuration/ncurses_engine_config.h"
 #include "profile/profile_loader.h"
-#include "profile/profile.h"
 
-Profile LoadProfile(std::string profile_name){
-
-}
 void RunConnetionTest(){}
 
 int main() {
@@ -38,10 +34,11 @@ int main() {
       //  auto notification_window = window_repository->WindowByName<NotificationWindow>("Notification");
       // notification_window->DisplayMessage("Not selected");
       if(table_selection.size() != 0){
-        LoadProfile(table_selection.at(0));
+        auto profile = ProfileLoader::LoadProfile(table_selection.at(0));
         // notification_window->DisplayMessage();
+        window_repository->WindowByName("File Selector")->Hide();
+        window_repository->WindowByName("Connection Table")->Show();
       }
-      //   LoadProfile(table_selection);
     }
 
     //handle menu selection
