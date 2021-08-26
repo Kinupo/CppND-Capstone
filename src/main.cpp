@@ -3,15 +3,21 @@
 
 #include "configuration/ncurses_engine_config.h"
 #include "profile/profile_loader.h"
+#include "configuration/windows_configuration.h"
 
 void RunConnetionTest(){}
 
 int main() {
 
   bool should_quit = false;
+  auto window_names = std::shared_ptr<std::vector<std::string>>(new std::vector<std::string>
+    {"Connection Table", "File Selector", "menue", "Notification"});
 
-  auto window_repository = NcursesEngineConfiguration::GenerateWindowRepository();
-  auto ncurses_engine = NcursesEngineConfiguration::GenerateConectionTestEngine(*window_repository);
+  auto window_repository = NcursesEngineConfiguration::GenerateWindowRepository(
+    WindowsConfiguration::ConnectionTesterWindowFactoryDeffinitions());
+  auto ncurses_engine = NcursesEngineConfiguration::GenerateConectionTestEngine(
+    *window_repository, 
+    window_names);
 
   while (!should_quit) {
     
@@ -40,9 +46,7 @@ int main() {
         window_repository->WindowByName("Connection Table")->Show();
       }
     }
-
-    //handle menu selection
-    //handle profile load
+ 
     //event store
     //event dispatcher
     //protocols
