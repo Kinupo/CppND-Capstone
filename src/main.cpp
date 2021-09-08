@@ -41,7 +41,22 @@ bool HandleInput(WindowRepository &window_repository, ConnectionTester &connecti
       }
       
     } else if(window_repository.WindowByName("Connection Table")->IsVisable()){
+      
       auto connection_test_status = connection_tester.Status();
+      std::vector<std::unique_ptr<std::vector<std::string>>> connection_table_data;
+      for(auto& status:*connection_test_status){
+        auto status_row = std::make_unique<std::vector<std::string>>();
+        status_row->emplace_back(status->name);
+        status_row->emplace_back(status->protocol_name);
+        status_row->emplace_back(status->status);
+        status_row->emplace_back(std::to_string(status->duration_ms) + " ms");
+        connection_table_data.emplace_back(std::move(status_row));
+      }
+
+      window_repository.WindowByName<NotificationWindow>("Notification")->DisplayMessage("Number of results" + std::to_string(connection_table_data.size()));
+
+      window_repository.WindowByName<TableWindow>("Connection Table")->TableData(std::move(connection_table_data));
+
     }
     
       return false;
