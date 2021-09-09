@@ -5,6 +5,7 @@
 #include "profile/profile_loader.h"
 #include "configuration/windows_configuration.h"
 #include "connection_tester/connection_tester.h"
+#include "connection_tester/protocols/http_head.h"
 
 void FileSelectorHandler(WindowRepository &window_repository, ConnectionTester &connection_tester){
 
@@ -82,6 +83,7 @@ int main() {
     *window_repository, 
     window_names);
   auto connection_tester = std::make_unique<ConnectionTester>();
+  connection_tester->RegisterProtocol(std::make_shared<HttpHead>());
   int loop_count = 0;
   while (!should_quit) {
     
@@ -92,8 +94,6 @@ int main() {
     window_repository->WindowByName<NotificationWindow>("Notification")->DisplayMessage(std::to_string(loop_count++));
     //event store
     //event dispatcher
-    //protocols
-    //connections
   }
 
   return 0;

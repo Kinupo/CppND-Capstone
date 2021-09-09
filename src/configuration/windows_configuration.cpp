@@ -27,11 +27,11 @@ std::unique_ptr<Window> WindowsConfiguration::BuildConnectionsWindow(WindowRepos
     
     auto connection_columns = std::vector<std::unique_ptr<Column>>();
     connection_columns.emplace_back(std::move(
-        std::unique_ptr<Column>(new Column{"Name", 0, 30})));
+        std::unique_ptr<Column>(new Column{"Name", 0, 25})));
     connection_columns.emplace_back(std::move(
         std::unique_ptr<Column>(new Column{"Protocol", 0, 10})));
     connection_columns.emplace_back(std::move(
-        std::unique_ptr<Column>(new Column{"Status", 0, 10})));
+        std::unique_ptr<Column>(new Column{"Status", 0, 20})));
     connection_columns.emplace_back(std::move(
         std::unique_ptr<Column>(new Column{"Latency (ms)", 0, 14})));
     

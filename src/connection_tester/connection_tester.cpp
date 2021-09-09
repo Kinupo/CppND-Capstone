@@ -1,5 +1,6 @@
 #include "connection_tester/connection_tester.h"
-#include "connection_tester/protocols/http_head.h"
+
+ConnectionTester::ConnectionTester(){}
 
 void ConnectionTester::TestConnections(std::vector<std::unique_ptr<Connection>> connections){
     _connections.clear();
@@ -7,6 +8,10 @@ void ConnectionTester::TestConnections(std::vector<std::unique_ptr<Connection>> 
         connection->TestConnection();
         _connections.emplace_back(std::move(connection));
     }
+}
+
+void ConnectionTester::RegisterProtocol(std::shared_ptr<Protocol> protocol){
+    _protocols[protocol->Name()] = protocol;
 }
 
 std::unique_ptr<std::vector<std::shared_ptr<ConnectionTestStatus>>> ConnectionTester::Status(){
@@ -20,6 +25,12 @@ std::unique_ptr<Connection> ConnectionTester::MakeConnection(
     std::string name, 
     std::string address, 
     std::string protocol){
-        auto protocol_instance = std::make_shared<HttpHead>();
-        return std::make_unique<Connection>(name, address, protocol_instance);
-    }
+        
+    std::shared_ptr<Protocol> protocol_instance;
+    if(_protocols.find(protocol) == _protocols.end())
+        protocol_instance = std::make_shared<ProtocolNotFound>(protocol);
+    else
+        protocol_instance = _protocols[protocol];
+
+    return std::make_unique<Connection>(name, address, protocol_instance);
+}

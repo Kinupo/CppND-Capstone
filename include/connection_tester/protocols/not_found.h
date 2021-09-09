@@ -5,6 +5,7 @@
 
 class ProtocolNotFound : public Protocol {
     public:
+        ProtocolNotFound(std::string name);
         std::string TestConnection(std::string address);
 };
 
