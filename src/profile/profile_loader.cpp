@@ -32,16 +32,19 @@
 
             auto profile_connection = std::make_unique<ConnectionProfile>();
             
+            int end_of_first_field = profile_line.find_first_of(',');
+            int end_of_second_field = profile_line.find_last_of(',');
+            //TODO:: check for invalid data
             profile_connection->address =
                 profile_line.substr(
-                    profile_line.find_first_of(',') +1, 
-                    profile_line.find_last_of(',')-1);
+                    end_of_first_field +1,
+                    end_of_second_field - end_of_first_field -1);
             profile_connection->name = 
                 profile_line.substr(
                     0, 
-                    profile_line.find_first_of(','));
+                   end_of_first_field);
             profile_connection->protocal = 
-                profile_line.substr(profile_line.find_last_of(',') +1);
+                profile_line.substr(end_of_second_field +1);
             
             return profile_connection;
     }

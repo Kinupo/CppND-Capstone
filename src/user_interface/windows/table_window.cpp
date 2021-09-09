@@ -21,6 +21,7 @@ void TableWindow::TableData(std::vector<std::unique_ptr<Row>> rows){
 
 void TableWindow::TableData(std::vector<std::unique_ptr<std::vector<std::string>>> rows){
      _rows.clear();
+     _selected = std::vector<std::string>();
     for(auto& row_data:rows){
         auto row = std::make_unique<Row>();
         row->data = *row_data;
@@ -103,7 +104,8 @@ bool TableWindow::ProcessClick(MEVENT& mouse_event){
             _selected = _rows.at(y_mouse_position -_y_pos -6)->data;
             return true;
         } else {
-            _selected = std::vector<std::string>();
+            //it is clearing the slected before being processed
+            // _selected = std::vector<std::string>();
         }
     }
     return false;

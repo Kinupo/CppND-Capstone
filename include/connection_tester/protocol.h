@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <condition_variable>
 
 class Protocol {
     private:

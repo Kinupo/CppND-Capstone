@@ -2,6 +2,7 @@
 #define _CONNECTION_TESTER_PROTOCOLS_HTTP_HEAD_H_
 
 #include <iostream>
+#include <thread>
 
 #include <boost/beast.hpp>
 #include <boost/beast/http.hpp>
