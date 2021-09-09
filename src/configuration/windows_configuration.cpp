@@ -2,7 +2,7 @@
 
 std::unique_ptr<Window> WindowsConfiguration::BuildMenu(__attribute__((unused)) WindowRepository& window_repository){
     std::vector<std::string> menu_options{"Load", "Quit"};
-    auto menu_window = std::make_unique<MenuWindow>("menue", 0, 3, menu_options);
+    auto menu_window = std::make_unique<MenuWindow>("menu", 0, 3, menu_options);
     menu_window->Show();
     return menu_window;
 }
@@ -20,7 +20,7 @@ std::unique_ptr<Window> WindowsConfiguration::BuildConnectionsWindow(WindowRepos
         0,//fill remaining screen 
         0,//fill remaining screen
         //put the window to the right of menu and below notification
-        window_repository.WindowByName("menue")->Width() +1,
+        window_repository.WindowByName("menu")->Width() +1,
         window_repository.WindowByName("Notification")->Height() +1);
 
     connection_window->Title("Connections");
@@ -47,7 +47,7 @@ std::unique_ptr<Window> WindowsConfiguration::BuildProfilesWindow(WindowReposito
         0,//fill remaining screen 
         0,//fill remaining screen
         //put the window to the right of menu and below notification
-        window_repository.WindowByName("menue")->Width() +1,
+        window_repository.WindowByName("menu")->Width() +1,
         window_repository.WindowByName("Notification")->Height() +1);
     
     file_selection_window->Title("Profiles");
@@ -74,7 +74,7 @@ std::vector<std::unique_ptr<NcursesEngineConfiguration::WindowFactoryDeffinition
    
     factory_deffinitions.emplace_back(std::move(BuildDeffinition(&BuildProfilesWindow, "File Selector")));
     factory_deffinitions.emplace_back(std::move(BuildDeffinition(&BuildConnectionsWindow, "Connection Table")));
-    factory_deffinitions.emplace_back(std::move(BuildDeffinition(&BuildMenu, "menue")));
+    factory_deffinitions.emplace_back(std::move(BuildDeffinition(&BuildMenu, "menu")));
     factory_deffinitions.emplace_back(std::move(BuildDeffinition(&BuildNotificationWindow, "Notification")));
 
     return factory_deffinitions;

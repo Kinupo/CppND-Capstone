@@ -1,11 +1,13 @@
 #include <memory>
 #include <string>
 
-#include "configuration/ncurses_engine_config.h"
-#include "profile/profile_loader.h"
-#include "configuration/windows_configuration.h"
+#include "configuration/connection_tester_configuration.h"
 #include "connection_tester/connection_tester.h"
-#include "connection_tester/protocols/http_head.h"
+
+#include "profile/profile_loader.h"
+//load ncurses dependent includes after connection tester due to issues with boost
+#include "configuration/windows_configuration.h"
+#include "configuration/ncurses_engine_config.h"
 
 void FileSelectorHandler(WindowRepository &window_repository, ConnectionTester &connection_tester){
 
@@ -27,8 +29,7 @@ void FileSelectorHandler(WindowRepository &window_repository, ConnectionTester &
       }
 }
 
-std::vector<std::unique_ptr<std::vector<std::string>>> FindUpdatedTestStatus(
-  ConnectionTester &connection_tester){
+std::vector<std::unique_ptr<std::vector<std::string>>> FindUpdatedTestStatus(ConnectionTester &connection_tester){
   
       auto connection_test_status = connection_tester.Status();
       std::vector<std::unique_ptr<std::vector<std::string>>> connection_table_data;
@@ -43,9 +44,9 @@ std::vector<std::unique_ptr<std::vector<std::string>>> FindUpdatedTestStatus(
       return connection_table_data;
 }
 
-bool HandleInput(WindowRepository &window_repository, ConnectionTester &connection_tester){
+bool HandleMainMenuSelection(WindowRepository &window_repository){
 
-    auto menu_selection = window_repository.WindowByName<MenuWindow>("menue")->Selected();
+    auto menu_selection = window_repository.WindowByName<MenuWindow>("menu")->Selected();
     if(menu_selection == "Quit")
       return true;
     else if (menu_selection == "Load"){
@@ -58,6 +59,10 @@ bool HandleInput(WindowRepository &window_repository, ConnectionTester &connecti
       window_repository.WindowByName("Connection Table")->Hide();
     }
 
+    return false;
+}
+
+void UpdateWindowData(WindowRepository &window_repository, ConnectionTester &connection_tester){
     if(window_repository.WindowByName("File Selector")->IsVisable()){
       FileSelectorHandler(window_repository, connection_tester);
     } 
@@ -67,31 +72,31 @@ bool HandleInput(WindowRepository &window_repository, ConnectionTester &connecti
       auto connection_table_data = FindUpdatedTestStatus(connection_tester);
       window_repository.WindowByName<TableWindow>("Connection Table")->TableData(std::move(connection_table_data));
     }
-    
-    return false;
 }
 
 int main() {
-
+  
   bool should_quit = false;
   auto window_names = std::shared_ptr<std::vector<std::string>>(new std::vector<std::string>
-    {"Connection Table", "File Selector", "menue", "Notification"});
+    {"Connection Table", "File Selector", "menu", "Notification"});
 
   auto window_repository = NcursesEngineConfiguration::GenerateWindowRepository(
     WindowsConfiguration::ConnectionTesterWindowFactoryDeffinitions());
   auto ncurses_engine = NcursesEngineConfiguration::GenerateConectionTestEngine(
     *window_repository, 
     window_names);
-  auto connection_tester = std::make_unique<ConnectionTester>();
-  connection_tester->RegisterProtocol(std::make_shared<HttpHead>());
-  int loop_count = 0;
+
+  auto connection_tester = ConnectionTesterConfiguration::GenerateConnectionTester();
+
+  // int loop_count = 0;
   while (!should_quit) {
     
     ncurses_engine->Draw();
     ncurses_engine->ProcessInput();
 
-    should_quit = HandleInput(*window_repository, *connection_tester);
-    window_repository->WindowByName<NotificationWindow>("Notification")->DisplayMessage(std::to_string(loop_count++));
+    should_quit = HandleMainMenuSelection(*window_repository);
+    UpdateWindowData(*window_repository, *connection_tester);
+    // window_repository->WindowByName<NotificationWindow>("Notification")->DisplayMessage(std::to_string(loop_count++));
     //event store
     //event dispatcher
   }

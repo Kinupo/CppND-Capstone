@@ -22,9 +22,7 @@ target_sources(
         )
 
 find_library(CURSES_LIBRARIES curses)
-find_package(Threads REQUIRED)
 
 target_link_libraries(
     windows_lib 
-        ${CURSES_LIBRARIES}
-)
+        ${CURSES_LIBRARIES})

@@ -21,7 +21,6 @@ target_sources(
         ${INCLUDE_PATH}/user_interface/window.h)
 
 find_library(CURSES_LIBRARIES curses)
-find_package(Threads REQUIRED)
 
 target_link_libraries(
     user_interface_library 

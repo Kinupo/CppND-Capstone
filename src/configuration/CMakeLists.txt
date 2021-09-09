@@ -14,4 +14,5 @@ target_sources(
         ncurses_engine_config.cpp
         windows_configuration.cpp
         ${INCLUDE_PATH}/configuration/ncurses_engine_config.h
-        ${INCLUDE_PATH}/configuration/windows_configuration.h)
+        ${INCLUDE_PATH}/configuration/windows_configuration.h
+        ${INCLUDE_PATH}/configuration/connection_tester_configuration.h)
