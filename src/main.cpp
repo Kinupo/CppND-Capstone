@@ -13,7 +13,7 @@ void FileSelectorHandler(WindowRepository &window_repository, ConnectionTester &
 
       auto table_selection = window_repository.WindowByName<TableWindow>("File Selector")->Selected();
       if(table_selection.size() != 0){
-
+        
         auto connection_profiles = ProfileLoader::LoadProfile(table_selection.at(0));
         window_repository.WindowByName("File Selector")->Hide();
         window_repository.WindowByName("Connection Table")->Show();
@@ -50,6 +50,7 @@ bool HandleMainMenuSelection(WindowRepository &window_repository){
     if(menu_selection == "Quit")
       return true;
     else if (menu_selection == "Load"){
+      
       //Load Profiles into the profile selction window
       auto profile_window = window_repository.WindowByName<TableWindow>("File Selector");
       profile_window->TableData(std::move(ProfileLoader::LoadProfileList()));
@@ -69,8 +70,10 @@ void UpdateWindowData(WindowRepository &window_repository, ConnectionTester &con
     //needs to be after File Selector handler so the connection table will update as soon
     //as the test starts
     if(window_repository.WindowByName("Connection Table")->IsVisable()){
+      
       auto connection_table_data = FindUpdatedTestStatus(connection_tester);
       window_repository.WindowByName<TableWindow>("Connection Table")->TableData(std::move(connection_table_data));
+      
     }
 }
 

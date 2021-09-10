@@ -53,8 +53,6 @@ bool MenuWindow::ProcessClick(MEVENT& mouse_event){
             && x_mouse_position < (_max_cols + _x_pos)){
             _selected = _menu_options.at(y_mouse_position -_y_pos -2);
             return true;
-        } else {
-            _selected = "";
         }
     }
     return false;

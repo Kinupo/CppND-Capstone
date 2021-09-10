@@ -29,5 +29,5 @@ void NotificationWindow::DisplayMessage(std::string message){
     _was_touched = true;
 }
 
-//TODO: check if click was on window
+//TODO: check if click was on window, clear message if clicked
 bool NotificationWindow::ProcessClick(MEVENT& mouse_event){return false;}

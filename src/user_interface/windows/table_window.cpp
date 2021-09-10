@@ -101,11 +101,8 @@ bool TableWindow::ProcessClick(MEVENT& mouse_event){
             && y_mouse_position <= (selectable_row_count + _y_pos +5)//last selectable row
             && x_mouse_position > (_x_pos +1)
             && x_mouse_position < (maximum_columns + _x_pos)){
-            _selected = _rows.at(y_mouse_position -_y_pos -6)->data;
-            return true;
-        } else {
-            //it is clearing the slected before being processed
-            // _selected = std::vector<std::string>();
+                _selected = _rows.at(y_mouse_position -_y_pos -6)->data;
+                return true;
         }
     }
     return false;
@@ -113,6 +110,6 @@ bool TableWindow::ProcessClick(MEVENT& mouse_event){
 
 std::vector<std::string> TableWindow::Selected(){
     auto current_selected = _selected;
-    _selected = std::vector<std::string>();
+    _selected.clear();
     return current_selected;
 }
