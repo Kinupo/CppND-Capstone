@@ -34,8 +34,13 @@ Tests connectivity to TCP destinations.  The API is extensible to support additi
 ## Execution Instructions
 
 1. Run `./capstone`.
-2. Click Load from the main menu.
-3. Click on the profile to load and the test will start immediately.
+2. Click Load from the main menu.  
+![main menu](/readme/main_menu.png?raw=true "Main Menu")
+3. Click on the profile to load.  
+![Profile selection](/readme/profile_selection.png?raw=true "Profile Selection")
+The test will start immediately.  
+![Test Start](/readme/test_start.png?raw=true "Test Start")
 4. Click Load to go back to the profile selection menu.
+![Test Complete](/readme/test_complete.png?raw=true "Test Complete")
 5. Click Quit to exit or send a break command `CTRL+C`
 
