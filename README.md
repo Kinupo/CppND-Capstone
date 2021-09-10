@@ -13,7 +13,7 @@ Tests connectivity to TCP destinations.  The API is extensible to support additi
   * Linux: gcc / g++ is installed by default on most Linux distros
   * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
   * Windows: recommend using [MinGW](http://www.mingw.org/)
-* ncurses
+* ncurses 6.2
   * default on Ubuntu 20.04 after update
 * boost 1.71
   * default on Ubuntu 20.04 after update
