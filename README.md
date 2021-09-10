@@ -45,7 +45,8 @@ The test will start immediately.
 ![Test Complete](/readme/test_complete.png?raw=true "Test Complete")  
 5. Click Quit to exit or send a break command `CTRL+C`  
 
-##[Program Flow](/readme/program_flow.png?raw=true "Program Flow")  
+## Program Flow  
+[Program Flow](/readme/program_flow.png?raw=true "Program Flow")  
 
 ## Dependecy Graph
 ![Dependency Graph](/readme/dependency_graph.png?raw=true "Dependency Graph")  
