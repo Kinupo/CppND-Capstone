@@ -48,7 +48,7 @@ The test will start immediately.
 ## Program Flow  
 ![Program Flow](/readme/program_flow.png?raw=true "Program Flow")  
 
-## Dependecy Graph
+## Dependency Graph
 ![Dependency Graph](/readme/dependency_graph.png?raw=true "Dependency Graph")  
 
 ## Grading Rubric
