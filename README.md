@@ -1,26 +1,39 @@
-# CPPND: Capstone Hello World Repo
+# CPPND: Capstone Terminal Connection Tester
 
-This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213).
-
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
-
-In this project, you can build your own C++ application starting with this repo, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+Tests connectivity to TCP destinations.  The API is extensible to support additional protocols, or custom requirements for the same protocol such as doing a health check on a HTTP site.
 
 ## Dependencies for Running Locally
-* cmake >= 3.7
+* cmake >= 3.16
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
-* make >= 4.1 (Linux, Mac), 3.81 (Windows)
+* make >= 4.2 (Linux, Mac)
   * Linux: make is installed by default on most Linux distros
   * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
   * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
-* gcc/g++ >= 5.4
+* gcc/g++ >= 10.3
   * Linux: gcc / g++ is installed by default on most Linux distros
   * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
   * Windows: recommend using [MinGW](http://www.mingw.org/)
+* ncurses
+  * default on Ubuntu 20.04 after update
+* boost 1.71
+  * default on Ubuntu 20.04 after update
 
 ## Basic Build Instructions
 
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./HelloWorld`.
+
+## Configuration
+
+1. profiles
+  a. Add a line to the profiles file with the format <profile name>,<profile file name>
+
+## Execution Instructions
+
+1. Run `./capstone`.
+2. Click Load from the main menu
+3. Click on the profile to load and the test will start immedalty
+4. Click Load to go back to the profile selection menu.
+5. Click Quit to exit or send a break command (CTRL+C)
+

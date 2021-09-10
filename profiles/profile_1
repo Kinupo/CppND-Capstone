@@ -1,0 +1,6 @@
+google ICMP,www.google.com,ICMP
+google search HTTP,www.google.com:80,TCP
+google DNS,8.8.8.8:53,TCP
+google search HTTPS,www.google.com:443,TCP
+google time out,www.google.com:444,TCP
+Unreachabel,w,TCP
