@@ -38,11 +38,11 @@ std::string Tcp::TestConnection(std::string address){
         stream->close();
         
         if(timed_out_future.valid() 
-            && timed_out_future.wait_for(std::chrono::seconds(6)) == std::future_status::timeout)
+            && timed_out_future.wait_for(std::chrono::seconds(5)) == std::future_status::timeout)
             return "Timed Out";
 
     } catch (const boost::system::system_error& exception){
-        return "Unreachable";
+        return "Host not found";
     }
     return "OK";
 }

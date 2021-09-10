@@ -91,7 +91,6 @@ int main() {
 
   auto connection_tester = ConnectionTesterConfiguration::GenerateConnectionTester();
 
-  // int loop_count = 0;
   while (!should_quit) {
     
     ncurses_engine->Draw();
@@ -99,7 +98,6 @@ int main() {
 
     should_quit = HandleMainMenuSelection(*window_repository);
     UpdateWindowData(*window_repository, *connection_tester);
-    // window_repository->WindowByName<NotificationWindow>("Notification")->DisplayMessage(std::to_string(loop_count++));
     //event store
     //event dispatcher
   }

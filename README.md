@@ -27,15 +27,15 @@ Tests connectivity to TCP destinations.  The API is extensible to support additi
 ## Configuration
 
 1. profiles  
-  a. Add a line to the profiles file with the format [profile name],[profile file name]  
+  a. Add a line to the profiles file with the format `profile name`,`profile file name`  
   b. Create profile file with the file name  
-  c. Add test configuration line with the format [Display name],[Host:port],[Protocol (TCP is the only one supported)]
+  c. Add test configuration line with the format `Display name`,`Host:port`,`Protocol (TCP is the only one supported)`
 
 ## Execution Instructions
 
 1. Run `./capstone`.
-2. Click Load from the main menu
-3. Click on the profile to load and the test will start immedalty
+2. Click Load from the main menu.
+3. Click on the profile to load and the test will start immediately.
 4. Click Load to go back to the profile selection menu.
-5. Click Quit to exit or send a break command (CTRL+C)
+5. Click Quit to exit or send a break command `CTRL+C`
 
