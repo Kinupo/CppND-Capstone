@@ -17,12 +17,13 @@ Tests connectivity to TCP destinations.  The API is extensible to support additi
   * default on Ubuntu 20.04 after update
 * boost 1.71
   * default on Ubuntu 20.04 after update
+  * windows: [https://www.boost.org/doc/libs/1_77_0/more/getting_started/windows.html](https://www.boost.org/doc/libs/1_77_0/more/getting_started/windows.html)
 
 ## Basic Build Instructions
 
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
+3. Compile: `(cd .. && make build)`
 
 ## Configuration
 
@@ -33,14 +34,37 @@ Tests connectivity to TCP destinations.  The API is extensible to support additi
 
 ## Execution Instructions
 
-1. Run `./capstone`.
+1. Run `./capstone`.  
 2. Click Load from the main menu.  
-![main menu](/readme/main_menu.png?raw=true "Main Menu")
+![main menu](/readme/main_menu.png?raw=true "Main Menu")  
 3. Click on the profile to load.  
-![Profile selection](/readme/profile_selection.png?raw=true "Profile Selection")
+![Profile selection](/readme/profile_selection.png?raw=true "Profile Selection")  
 The test will start immediately.  
-![Test Start](/readme/test_start.png?raw=true "Test Start")
-4. Click Load to go back to the profile selection menu.
-![Test Complete](/readme/test_complete.png?raw=true "Test Complete")
-5. Click Quit to exit or send a break command `CTRL+C`
+![Test Start](/readme/test_start.png?raw=true "Test Start")  
+4. Click Load to go back to the profile selection menu.  
+![Test Complete](/readme/test_complete.png?raw=true "Test Complete")  
+5. Click Quit to exit or send a break command `CTRL+C`  
 
+##[Program Flow](/readme/program_flow.png?raw=true "Program Flow")  
+
+## Dependecy Graph
+![Dependency Graph](/readme/dependency_graph.png?raw=true "Dependency Graph")  
+
+## Grading Rubric
+
+### Loops, Functions, I/O
+src/file_reader/file_reader.cpp  
+src/profile/profile_loader.cpp FindProfileFileName LoadProfile  
+
+### Object Oriented Programming
+include/connection_tester/connection.h  
+src/connection_tester/connection.cpp  
+include/user_interface/window_repository.h
+src/user_interface/window_repository.cpp
+
+### Memory Management
+src/user_interface/window_repository.cpp  
+
+### Concurrency
+src/connection_tester/connection.cpp  TestConnection  
+src/connection_tester/protocols/tcp.cpp TestConnection
