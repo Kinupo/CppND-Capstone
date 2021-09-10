@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <thread>
+#include <future>
 
 #include <boost/beast.hpp>
 #include <boost/asio/ip/tcp.hpp>
