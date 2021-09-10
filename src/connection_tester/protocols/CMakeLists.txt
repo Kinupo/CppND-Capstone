@@ -13,9 +13,9 @@ target_include_directories(
 target_sources(
     protocols_library 
     PRIVATE
-        http_head.cpp
+        tcp.cpp
         not_found.cpp
-        ${INCLUDE_PATH}/connection_tester/protocols/http_head.h
+        ${INCLUDE_PATH}/connection_tester/protocols/tcp.h
         ${INCLUDE_PATH}/connection_tester/protocols/not_found.h)
 
 find_package(Boost 1.71.0)
