@@ -42,7 +42,7 @@
             profile_connection->name = 
                 profile_line.substr(
                     0, 
-                   end_of_first_field);
+                    end_of_first_field);
             profile_connection->protocal = 
                 profile_line.substr(end_of_second_field +1);
             

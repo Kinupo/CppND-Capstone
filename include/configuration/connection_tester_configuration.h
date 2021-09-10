@@ -11,8 +11,7 @@ namespace ConnectionTesterConfiguration {
         connection_tester->RegisterProtocol(std::make_shared<Tcp>());
         return connection_tester;
     }
-      
-
+    
 };
 
 #endif

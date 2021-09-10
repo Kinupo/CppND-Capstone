@@ -21,6 +21,9 @@ class Connection{
         std::string _status = "Idle";
         static const int kNanoSecondsToMilliseconds = 1000000;
         
+        void ConnectionTest();
+        long ComputeDuration();
+
     public:
         Connection(std::string name, std::string address, std::shared_ptr<Protocol> _protocol);
         //starts async test to see if the endpoint is reacheable
