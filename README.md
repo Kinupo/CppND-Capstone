@@ -26,8 +26,10 @@ Tests connectivity to TCP destinations.  The API is extensible to support additi
 
 ## Configuration
 
-1. profiles
-  a. Add a line to the profiles file with the format <profile name>,<profile file name>
+1. profiles  
+  a. Add a line to the profiles file with the format [profile name],[profile file name]  
+  b. Create profile file with the file name  
+  c. Add test configuration line with the format [Display name],[Host:port],[Protocol (TCP is the only one supported)]
 
 ## Execution Instructions
 
