@@ -92,12 +92,19 @@ int main() {
   auto connection_tester = ConnectionTesterConfiguration::GenerateConnectionTester();
 
   while (!should_quit) {
-    
+    try {
     ncurses_engine->Draw();
     ncurses_engine->ProcessInput();
 
     should_quit = HandleMainMenuSelection(*window_repository);
     UpdateWindowData(*window_repository, *connection_tester);
+    } catch (const std::runtime_error& runtime_excepton){
+      window_repository->WindowByName<NotificationWindow>("Notification")->
+        DisplayMessage("Exception Caught: " + std::string(runtime_excepton.what()));
+    } catch (const std::exception& excepton){
+      window_repository->WindowByName<NotificationWindow>("Notification")->
+        DisplayMessage("Exception Caught: " + std::string(excepton.what()));
+    }
     //event store
     //event dispatcher
   }

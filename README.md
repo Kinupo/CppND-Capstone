@@ -35,7 +35,7 @@ Tests connectivity to TCP destinations.  The API is extensible to support additi
 ## Execution Instructions
 
 1. Run `./capstone`.  
-2. Click Load from the main menu.  
+2. Click Load from the main menu. *If there is no response when clicking turn on num lock and try again
 ![main menu](/readme/main_menu.png?raw=true "Main Menu")  
 3. Click on the profile to load.  
 ![Profile selection](/readme/profile_selection.png?raw=true "Profile Selection")  

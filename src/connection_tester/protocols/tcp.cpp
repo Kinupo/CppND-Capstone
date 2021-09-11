@@ -8,7 +8,12 @@ void ConnectToHost(
     std::promise<bool> timed_out_promise){
 
     if(resolved_addresses.end() != resolved_addresses){
-        stream->connect(resolved_addresses);  
+        try{
+            stream->connect(resolved_addresses);  
+        } catch (const std::runtime_error& runtime_exception){
+            //Ignore for now, this happens when the server does not respond but accepts the SYN 
+            //this is protection from port scanning and SYN flood
+        }
     }
 }
 
@@ -35,7 +40,8 @@ std::string Tcp::TestConnection(std::string address){
             std::move(timed_out_promise));
         connection_thread.detach();
 
-        stream->close();
+        if(stream->socket().is_open());
+            stream->socket().close();
         
         if(timed_out_future.valid() 
             && timed_out_future.wait_for(std::chrono::seconds(5)) == std::future_status::timeout)
