@@ -15,8 +15,11 @@ Tests connectivity to TCP destinations.  The API is extensible to support additi
   * Windows: recommend using [MinGW](http://www.mingw.org/)
 * ncurses 6.2
   * default on Ubuntu 20.04 after update
+  * Linux additional help [https://stackoverflow.com/questions/4678926/cmake-cant-find-curses](https://stackoverflow.com/questions/4678926/cmake-cant-find-curses)
 * boost 1.71
   * default on Ubuntu 20.04 after update
+  * Detailed instructions [https://onethinglab.com/2019/01/30/how-to-install-latest-boost-library-on-ubuntu/](https://onethinglab.com/2019/01/30/how-to-install-latest-boost-library-on-ubuntu/)
+  * Linux [https://www.boost.org/doc/libs/1_77_0/more/getting_started/unix-variants.html](https://www.boost.org/doc/libs/1_77_0/more/getting_started/unix-variants.html)
   * windows: [https://www.boost.org/doc/libs/1_77_0/more/getting_started/windows.html](https://www.boost.org/doc/libs/1_77_0/more/getting_started/windows.html)
 
 ## Basic Build Instructions
